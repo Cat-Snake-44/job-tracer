@@ -15,10 +15,10 @@ function JobApplicationList({ jobApplications, deleteJobApplication }) {
         {jobApplications &&
           jobApplications.map((application) => (
             <JobApplication
-              key={`job-${application.id}`}
-              id={application.id}
-              companyName={application.company_name}
-              jobTitle={application.job_title}
+              key={`job-${application._id}`}
+              id={application._id}
+              company_name={application.company_name}
+              job_title={application.job_title}
               status={application.status_name}
               deleteJobApplication={deleteJobApplication}
             />

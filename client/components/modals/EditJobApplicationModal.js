@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
   const { jobApplications } = state.jobApplications;
 
   const jobApplicationToEditArray = jobApplications.filter((el) => {
-    return el.id === jobAppId;
+    return el._id === jobAppId;
   });
   const jobApplicationObject = jobApplicationToEditArray[0];
   console.log(jobApplicationObject);
