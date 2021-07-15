@@ -5,11 +5,11 @@ const JobApplication = (props) => {
   const [show, setShow] = useState(false);
   return (
     <>
-      {props.companyName && (
+      {props.company_name && (
         <div className="job-application">
           <div className="row space-around">
-            <p>{props.companyName}</p>
-            <p className="ml">{props.jobTitle}</p>
+            <p>{props.company_name}</p>
+            <p className="ml">{props.job_title}</p>
             <p className="ml">{props.status}</p>
           </div>
           <button
@@ -20,14 +20,14 @@ const JobApplication = (props) => {
             Edit
           </button>
           <EditJobApplicationModal
-            jobAppId={props.id}
+            jobAppId={props._id}
             onClose={() => setShow(false)}
             show={show}
           />
           <button
             className=" btn btn-delete"
             type="button"
-            onClick={() => props.deleteJobApplication(props.id)}
+            onClick={() => props.deleteJobApplication(props._id)}
           >
             Delete
           </button>

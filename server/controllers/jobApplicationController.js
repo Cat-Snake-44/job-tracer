@@ -4,7 +4,12 @@ const db = require('../models/jobApplicationModels');
 const jobApplicationController = {};
 
 // get all jobApplications
-
+/**
+ * These are the controllers
+ * @param {*} req this is the req object 
+ * @param {*} res 
+ * @param {*} next 
+ */
 jobApplicationController.getJobApplications = (req, res, next) => {
   // create query string
   const queryStr = `
@@ -33,13 +38,13 @@ jobApplicationController.getJobApplications = (req, res, next) => {
 jobApplicationController.createJobApplication = (req, res, next) => {
   // get values from the req body
   const {
-    companyName,
-    jobTitle,
+    company_name,
+    job_title,
     salary,
     description,
-    postSource,
-    statusName,
-    statusDate,
+    post_source,
+    status_name,
+    status_date,
     notes,
     favorite,
   } = req.body;
@@ -47,13 +52,13 @@ jobApplicationController.createJobApplication = (req, res, next) => {
   // put values in to a new array
 
   const jobApplicationValues = [
-    companyName,
-    jobTitle,
+    company_name,
+    job_title,
     salary,
     description,
-    postSource,
-    statusName,
-    statusDate,
+    post_source,
+    status_name,
+    status_date,
     notes,
     favorite,
   ];
@@ -65,12 +70,21 @@ jobApplicationController.createJobApplication = (req, res, next) => {
       applications 
         (company_name,job_title,salary,description,post_source,status_name, status_date, notes, favorite)
       VALUES 
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
 
   // call db query passing in query string and values array
 
   db.query(queryStr, jobApplicationValues)
-    .then(() => {
+    //   (data, error) => {
+    //   if(error) 
+    //   return next(error);
+    // else {
+    //   console.log('this is data', data);
+    //   res.locals.result = data.rows[0]
+    // }})
+    .then((data) => {
+      console.log('this is data', data);
+      res.locals.result = data.rows[0]
       return next();
     })
     .catch((err) => {
@@ -92,11 +106,11 @@ jobApplicationController.updateJobApplicationById = (req, res, next) => {
   // get values from req body
 
   const {
-    companyName,
-    jobTitle,
+    company_name,
+    job_title,
     salary,
     description,
-    postSource,
+    post_source,
     notes,
     favorite,
   } = req.body;
@@ -104,11 +118,11 @@ jobApplicationController.updateJobApplicationById = (req, res, next) => {
   // add job application id as last array element
 
   const updatedJobApplicationValues = [
-    companyName,
-    jobTitle,
+    company_name,
+    job_title,
     salary,
     description,
-    postSource,
+    post_source,
     notes,
     favorite,
     id,

@@ -3,7 +3,7 @@ CREATE TABLE applications (
     _id serial PRIMARY KEY,
     company_name varchar NOT NULL,
     job_title varchar NOT NULL,
-    salaray integer,
+    salary integer,
     "description" varchar,
     post_source varchar,
     status_name varchar,

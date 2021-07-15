@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         jobApplications: state.jobApplications.filter(
-          (application) => application.id !== action.payload
+          (application) => application._id !== action.payload
         ),
       };
     case types.EDIT_JOB_APPLICATION:

@@ -14,14 +14,14 @@ class CreateJobApplicationModal extends React.Component {
     super(props);
     this.state = {
       details: {
-        companyName: '',
-        jobTitle: '',
+        company_name: '',
+        job_title: '',
         salary: '',
-        postSource: '',
+        post_source: '',
         description: '',
-        statusName: '',
+        status_name: '',
         notes: '',
-        statusDate: '',
+        status_date: '',
         favorite: false,
       },
     };
@@ -35,14 +35,14 @@ class CreateJobApplicationModal extends React.Component {
     this.props.loadJobApplications();
     this.setState({
       details: {
-        companyName: '',
-        jobTitle: '',
+        company_name: '',
+        job_title: '',
         salary: '',
-        postSource: '',
+        post_source: '',
         description: '',
-        statusName: '',
+        status_name: '',
         notes: '',
-        statusDate: '',
+        status_date: '',
         favorite: false,
       },
     });
@@ -83,8 +83,8 @@ class CreateJobApplicationModal extends React.Component {
                 Company Name:
                 <input
                   type="text"
-                  name="companyName"
-                  value={this.state.details.companyName}
+                  name="company_name"
+                  value={this.state.details.company_name}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -92,8 +92,8 @@ class CreateJobApplicationModal extends React.Component {
                 Job Title:
                 <input
                   type="text"
-                  name="jobTitle"
-                  value={this.state.details.jobTitle}
+                  name="job_title"
+                  value={this.state.details.job_title}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -110,16 +110,16 @@ class CreateJobApplicationModal extends React.Component {
                 Application Status Date:
                 <input
                   type="date"
-                  name="statusDate"
-                  value={this.state.details.statusDate}
+                  name="status_date"
+                  value={this.state.details.status_date}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
               <label>
                 Application Status:
                 <select
-                  defaultValue={this.state.details.statusName}
-                  name="statusName"
+                  defaultValue={this.state.details.status_name}
+                  name="status_name"
                   onChange={this.formFieldChangeHandler}
                 >
                   <option value="pending">Pending</option>
@@ -134,8 +134,8 @@ class CreateJobApplicationModal extends React.Component {
               <label>
                 Post Source:
                 <select
-                  defaultValue={this.state.details.postSource}
-                  name="postSource"
+                  defaultValue={this.state.details.post_source}
+                  name="post_source"
                   onChange={this.formFieldChangeHandler}
                 >
                   <option value="friend">Friend</option>
