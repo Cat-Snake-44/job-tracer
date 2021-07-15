@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-const config = require('config');
 
 /*
 
@@ -18,7 +17,8 @@ https://www.elephantsql.com/docs/index.html
 
 // Import elephant db connection string.
 
-const PG_URI = config.get('PG_URI');
+const PG_URI =
+  'postgres://zosmzcvy:pf06g_1gl0nVRd_p5JyqY33RzyON4BsU@batyr.db.elephantsql.com/zosmzcvy';
 
 const pool = new Pool({
   connectionString: PG_URI,

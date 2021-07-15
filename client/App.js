@@ -35,4 +35,5 @@ const App = (props) => {
   );
 };
 
+export { App as AppUnwrapped };
 export default connect(mapStateToProps, null)(App);
