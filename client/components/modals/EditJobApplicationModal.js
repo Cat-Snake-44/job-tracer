@@ -3,18 +3,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/actions';
 
+/**
+ * A function that maps state to the props on the EditJobApplicationModal React Component
+ * @param {object} state
+ * @param {*} ownProps
+ */
 const mapStateToProps = (state, ownProps) => {
   const { jobAppId, show, onClose } = ownProps;
   const { jobApplications } = state.jobApplications;
 
   const jobApplicationToEditArray = jobApplications.filter((el) => {
+    // eslint-disable-next-line no-underscore-dangle
     return el._id === jobAppId;
   });
   const jobApplicationObject = jobApplicationToEditArray[0];
-  console.log(jobApplicationObject);
   return { jobAppId, show, onClose, jobApplicationObject };
 };
 
+/**
+ * A function that maps dispatch to the props on the EditJobApplicationModal React Component
+ * @param {function} dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
   return {
     editAppHandler: (jobAppId, jobApplicationObject) =>
@@ -22,6 +31,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+/**
+ * Creates an EditJobApplicationModal React Component
+ */
 class EditJobApplicationModal extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +43,7 @@ class EditJobApplicationModal extends React.Component {
   }
 
   formFieldChangeHandler(event) {
+    event.preventDefault();
     this.props.jobApplicationObject[event.target.name] = event.target.value;
   }
 
@@ -59,12 +72,10 @@ class EditJobApplicationModal extends React.Component {
                 Favorite?:
                 <select
                   name="favorite"
-                  value={this.props.jobApplicationObject.favorite}
+                  defaultValue={this.props.jobApplicationObject.favorite}
                   onChange={this.formFieldChangeHandler}
                 >
-                  <option selected value="false">
-                    No
-                  </option>
+                  <option defaultValue="false">No</option>
                   <option value="true">Yes</option>
                 </select>
               </label>
@@ -73,7 +84,7 @@ class EditJobApplicationModal extends React.Component {
                 <input
                   type="text"
                   name="company_name"
-                  value={this.props.jobApplicationObject.company_name}
+                  placeholder={this.props.jobApplicationObject.company_name}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -82,16 +93,18 @@ class EditJobApplicationModal extends React.Component {
                 <input
                   type="text"
                   name="job_title"
-                  value={this.props.jobApplicationObject.job_title}
+                  placeholder={this.props.jobApplicationObject.job_title}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
               <label>
                 Salary:
                 <input
-                  type="text"
+                  type="number"
+                  min="0"
+                  max="10000000"
                   name="salary"
-                  value={this.props.jobApplicationObject.salary}
+                  placeholder={this.props.jobApplicationObject.salary}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -100,7 +113,7 @@ class EditJobApplicationModal extends React.Component {
                 <input
                   type="date"
                   name="status_date"
-                  value={this.props.jobApplicationObject.status_date}
+                  placeholder={this.props.jobApplicationObject.status_date}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -108,12 +121,10 @@ class EditJobApplicationModal extends React.Component {
                 Application Status:
                 <select
                   name="status_name"
-                  value={this.props.jobApplicationObject.status_name}
+                  placeholder={this.props.jobApplicationObject.status_name}
                   onChange={this.formFieldChangeHandler}
                 >
-                  <option selected value="pending">
-                    Pending
-                  </option>
+                  <option defaultValue="pending">Pending</option>
                   <option value="applied">Applied</option>
                   <option value="interviewed">Interviewed</option>
                   <option value="offer_received">Offer Received</option>
@@ -126,12 +137,10 @@ class EditJobApplicationModal extends React.Component {
                 Post Source:
                 <select
                   name="post_source"
-                  value={this.props.jobApplicationObject.post_source}
+                  placeholder={this.props.jobApplicationObject.post_source}
                   onChange={this.formFieldChangeHandler}
                 >
-                  <option selected value="friend">
-                    Friend
-                  </option>
+                  <option defaultValue="friend">Friend</option>
                   <option value="internet">Internet</option>
                 </select>
               </label>
@@ -139,7 +148,7 @@ class EditJobApplicationModal extends React.Component {
                 Description:
                 <textarea
                   name="description"
-                  value={this.props.jobApplicationObject.description}
+                  placeholder={this.props.jobApplicationObject.description}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
@@ -147,7 +156,7 @@ class EditJobApplicationModal extends React.Component {
                 Notes:
                 <textarea
                   name="notes"
-                  value={this.props.jobApplicationObject.notes}
+                  placeholder={this.props.jobApplicationObject.notes}
                   onChange={this.formFieldChangeHandler}
                 />
               </label>
