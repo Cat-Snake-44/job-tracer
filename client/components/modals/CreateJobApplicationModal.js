@@ -39,7 +39,6 @@ class CreateJobApplicationModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.addJobApplication(this.state.details);
-    console.log('hiiii', this.state.details);
     this.props.loadJobApplications();
     this.setState({
       details: {

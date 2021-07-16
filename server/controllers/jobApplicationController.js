@@ -81,14 +81,6 @@ jobApplicationController.createJobApplication = (req, res, next) => {
   // call db query passing in query string and values array
 
   db.query(queryStr, jobApplicationValues)
-    //   (data, error) => {
-    // eslint-disable-next-line prettier/prettier
-    //   if(error) 
-    //   return next(error);
-    // else {
-    //   console.log('this is data', data);
-    //   res.locals.result = data.rows[0]
-    // }})
     .then((data) => {
       console.log('this is data', data);
       // eslint-disable-next-line prettier/prettier

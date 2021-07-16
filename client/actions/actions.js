@@ -29,7 +29,6 @@ export const loadJobApplications = () => (dispatch) => {
  * @param {function} dispatch
  */
 export const addJobApplication = (data) => (dispatch) => {
-  console.log(data);
   fetch(`api/jobApplication`, {
     method: 'POST',
     headers: {
@@ -78,8 +77,6 @@ export const deleteJobApplication = (_id) => (dispatch) => {
  * @param {function} dispatch
  */
 export const editApp = (jobAppId, jobApplicationObject) => (dispatch) => {
-  console.log('idd', jobAppId);
-  console.log('jobbbappobject', jobApplicationObject);
   fetch(`api/jobApplication`, {
     method: 'PUT',
     headers: {

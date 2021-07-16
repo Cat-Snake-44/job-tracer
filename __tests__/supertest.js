@@ -57,7 +57,6 @@ describe('Route integration', () => {
             .send(temp)
             // eslint-disable-next-line no-unused-vars
             .expect((res) => {
-              console.log('this is res.body:', res.body, 'this is temp:', temp);
               expect(JSON.parse(res.text)).toEqual(
                 expect.objectContaining(temp)
               );

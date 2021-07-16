@@ -17,7 +17,6 @@ const mapStateToProps = (state, ownProps) => {
     return el._id === jobAppId;
   });
   const jobApplicationObject = jobApplicationToEditArray[0];
-  console.log(jobApplicationObject);
   return { jobAppId, show, onClose, jobApplicationObject };
 };
 
