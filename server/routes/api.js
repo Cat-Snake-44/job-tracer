@@ -37,7 +37,7 @@ router.put(
   '/jobApplication',
   jobApplicationController.updateJobApplicationById,
   (req, res) => {
-    res.status(200).json({});
+    res.status(200).json(res.locals.update);
   }
 );
 

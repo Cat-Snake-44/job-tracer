@@ -1,14 +1,15 @@
+/* eslint-disable camelcase */
 // import the jobApp Model
 const db = require('../models/jobApplicationModels');
 
 const jobApplicationController = {};
 
-// get all jobApplications
 /**
  * These are the controllers
- * @param {*} req this is the req object 
- * @param {*} res 
- * @param {*} next 
+ // eslint-disable-next-line prettier/prettier
+ * @param {Request} req 
+ * @param {Response} res
+ * @param {function} next 
  */
 jobApplicationController.getJobApplications = (req, res, next) => {
   // create query string
@@ -34,7 +35,12 @@ jobApplicationController.getJobApplications = (req, res, next) => {
 };
 
 // create new job application
-
+/**
+ * express middleware function that sends the new job application data to the client
+ * @param {*} req
+ * @param {*} res
+ * @param {fuction} next
+ */
 jobApplicationController.createJobApplication = (req, res, next) => {
   // get values from the req body
   const {
@@ -76,6 +82,7 @@ jobApplicationController.createJobApplication = (req, res, next) => {
 
   db.query(queryStr, jobApplicationValues)
     //   (data, error) => {
+    // eslint-disable-next-line prettier/prettier
     //   if(error) 
     //   return next(error);
     // else {
@@ -84,7 +91,9 @@ jobApplicationController.createJobApplication = (req, res, next) => {
     // }})
     .then((data) => {
       console.log('this is data', data);
-      res.locals.result = data.rows[0]
+      // eslint-disable-next-line prettier/prettier
+      // eslint-disable-next-line prefer-destructuring
+      res.locals.result = data.rows[0];
       return next();
     })
     .catch((err) => {
@@ -97,15 +106,21 @@ jobApplicationController.createJobApplication = (req, res, next) => {
 };
 
 // update job application
-
+/**
+ * express middleware function that sends the updated job application data to the client
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 jobApplicationController.updateJobApplicationById = (req, res, next) => {
   // get id from req query
 
-  const { id } = req.query;
+  // const { _id } = req.query;
 
   // get values from req body
 
   const {
+    _id,
     company_name,
     job_title,
     salary,
@@ -125,7 +140,7 @@ jobApplicationController.updateJobApplicationById = (req, res, next) => {
     post_source,
     notes,
     favorite,
-    id,
+    _id,
   ];
 
   // make query string
@@ -134,15 +149,17 @@ jobApplicationController.updateJobApplicationById = (req, res, next) => {
     UPDATE
       applications
     SET 
-      company_name = $1,job_title = $2,salary = $3, description = $4,post_source = $5,notes = $6,favorite = $7
+      company_name = $1,job_title = $2,salary = $3, description = $4, post_source = $5, notes = $6, favorite = $7
     WHERE 
-      id = $8  
-    `;
+      _id = $8  
+    RETURNING *`;
 
   //  query db
 
   db.query(queryStr, updatedJobApplicationValues)
-    .then(() => {
+    .then((data) => {
+      // eslint-disable-next-line prefer-destructuring
+      res.locals.update = data.rows[0];
       return next();
     })
     .catch((err) => {
@@ -154,24 +171,28 @@ jobApplicationController.updateJobApplicationById = (req, res, next) => {
     });
 };
 
-// delete job application
-
+/**
+ * express middleware function that sends the to be deleted job application data to the client
+ * @param {*} req
+ * @param {*} res
+ * @param {function} next
+ */
 jobApplicationController.deleteJobApplicationById = (req, res, next) => {
   // get id from req query
-  const { id } = req.query;
+  const { _id } = req.body;
 
-  console.log(id);
+  console.log(_id);
   // make query string
 
   const queryStr = `
     DELETE FROM 
       applications
     WHERE 
-      id = $1`;
+      _id = $1`;
 
   // query db
 
-  db.query(queryStr, [id])
+  db.query(queryStr, [_id])
     .then(() => {
       return next();
     })

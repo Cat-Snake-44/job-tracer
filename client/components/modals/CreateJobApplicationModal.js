@@ -3,12 +3,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/actions';
 
+/**
+ * A function that maps dispatch to the props on the CreateJobApplicationModal component
+ * @param {function} dispatch
+ */
 const mapDispatchToProps = (dispatch) => ({
   addJobApplication: (newJobApplication) =>
     dispatch(actions.addJobApplication(newJobApplication)),
   loadJobApplications: () => dispatch(actions.loadJobApplications),
 });
 
+/**
+ * Creating a CreateJobApplicationModal React Component
+ */
 class CreateJobApplicationModal extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +39,7 @@ class CreateJobApplicationModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.addJobApplication(this.state.details);
+    console.log('hiiii', this.state.details);
     this.props.loadJobApplications();
     this.setState({
       details: {
@@ -100,7 +108,9 @@ class CreateJobApplicationModal extends React.Component {
               <label>
                 Salary:
                 <input
-                  type="text"
+                  type="number"
+                  min="0"
+                  max="10000000"
                   name="salary"
                   value={this.state.details.salary}
                   onChange={this.formFieldChangeHandler}

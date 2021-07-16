@@ -20,6 +20,7 @@ const JobApplication = (props) => {
             Edit
           </button>
           <EditJobApplicationModal
+            // eslint-disable-next-line no-underscore-dangle
             jobAppId={props._id}
             onClose={() => setShow(false)}
             show={show}
@@ -27,6 +28,7 @@ const JobApplication = (props) => {
           <button
             className=" btn btn-delete"
             type="button"
+            // eslint-disable-next-line no-underscore-dangle
             onClick={() => props.deleteJobApplication(props._id)}
           >
             Delete
